@@ -11,7 +11,7 @@ export default function FligthItem({flight}) {
     }
 
     return(
-        <ListItem>
+        <ListItem sx={{height: '500px'}}>
             <ListItemButton onClick={handleClick}>
                 <ListItemText primary={`${flight.origin_city} => ${flight.dest_city}`} />
             </ListItemButton>
