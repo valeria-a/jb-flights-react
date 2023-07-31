@@ -3,9 +3,10 @@ import { useEffect, useState } from "react"
 import * as urls from "../../infra/urls";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { FlightSharp } from "@mui/icons-material";
+
 import FlightsSearch from "./flightSearch";
-import FlightsList from "./flightsList";
+import FlightsLits from "./flightsList";
+
 
 export default function FlightsPage() {
 
@@ -32,7 +33,8 @@ export default function FlightsPage() {
         <>
         <h2>Flights page</h2>
         <FlightsSearch />
-        <FlightsList />
+
+        <FlightsLits flights={flights} />
 
         <Button onClick={() => {navigate('/orders')}}>Go to orders</Button>
         </>
