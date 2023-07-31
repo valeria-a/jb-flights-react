@@ -1,8 +1,16 @@
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import * as urls from "../../infra/urls";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { FlightSharp } from "@mui/icons-material";
+import FlightsSearch from "./flightSearch";
+import FlightsList from "./flightsList";
 
 export default function FlightsPage() {
+
+    const navigate = useNavigate()
+    const [flights, setFlights] = useState([])
 
     useEffect(
         () => {
@@ -10,6 +18,7 @@ export default function FlightsPage() {
                 try {
                     const response = await axios.get(urls.FLIGHTS_LIST_URL)
                     console.log(response)
+                    setFlights(response.data.results)
                 } catch (e) {
                     console.error(e)
                 }
@@ -20,7 +29,13 @@ export default function FlightsPage() {
     )
 
     return(
+        <>
         <h2>Flights page</h2>
+        <FlightsSearch />
+        <FlightsList />
+
+        <Button onClick={() => {navigate('/orders')}}>Go to orders</Button>
+        </>
 
     )
 }
