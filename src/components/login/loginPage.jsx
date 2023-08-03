@@ -7,14 +7,21 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { LOGIN_URL, ME_URL } from "../../infra/urls";
+import { SetUserContext, UserContext } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
 
+    const navigate = useNavigate()
+    const setUser = useContext(SetUserContext)
+
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,6 +34,10 @@ export default function LoginPage() {
     const meResponse = await axios.get(ME_URL,
         {headers: {Authorization: `Bearer ${token}`}})
     console.log(meResponse)
+    setUser({
+        user: {...meResponse.data}
+    })
+    navigate('/')
   };
 
   return (

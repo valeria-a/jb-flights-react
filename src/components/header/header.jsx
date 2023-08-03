@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/userContext';
 
 const pages = ['Orders', 'Destinations', 'Blog'];
 const settings = ['Login', 'Profile', 'Account', 'Dashboard', 'Logout'];
@@ -20,6 +21,7 @@ const settings = ['Login', 'Profile', 'Account', 'Dashboard', 'Logout'];
 function Header() {
 
     const navigate = useNavigate()
+    const user = React.useContext(UserContext)
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -134,7 +136,7 @@ function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={user.user?.first_name} src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
