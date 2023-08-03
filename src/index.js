@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import FlightsPage from './components/flights/flightsPage';
 import OrdersPage from './components/orders/ordersPage';
 import FlightDetails from './components/flights/flightDetails';
+import LoginPage from './components/login/loginPage';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         element: <OrdersPage />
       }
     ]
+  },
+  {
+    path: '/login',
+    element: <LoginPage />
   }
 ])
 
