@@ -8,19 +8,25 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useState } from "react";
+import axios from "axios";
+import { LOGIN_URL, ME_URL } from "../../infra/urls";
 
 export default function LoginPage() {
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const response = 
+        await axios.post(LOGIN_URL, {username: email, password: password})
+    console.log(response)
+    localStorage.setItem('token', response.data.access)
+    
+    const token = localStorage.getItem('token')
+    const meResponse = await axios.get(ME_URL,
+        {headers: {Authorization: `Bearer ${token}`}})
+    console.log(meResponse)
   };
 
   return (
