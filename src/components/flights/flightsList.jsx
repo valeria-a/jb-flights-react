@@ -1,4 +1,4 @@
-import { List } from "@mui/material";
+import { Box, Container, List } from "@mui/material";
 import FligthItem from "./flightItem";
 import InfiniteScroll from "react-infinite-scroller";
 
@@ -11,14 +11,17 @@ export default function FlightsLits({flights, loadMore}) {
     })
 
     return(
-        <List>
-            <InfiniteScroll
-                pageStart={0}
-                loadMore={loadMore}
-                hasMore={next !== null}
-                loader={<div className="loader" key={0}>Loading ...</div>}>
-                    {items}
-            </InfiniteScroll>
-        </List>
+        <Container sx={{overflow: 'auto', height: '600px'}}>
+            <List sx={{maxWidth: '100%', padding: 0}}>
+                <InfiniteScroll
+                    pageStart={0}
+                    loadMore={loadMore}
+                    hasMore={next !== null}
+                    loader={<div className="loader" key={0}>Loading ...</div>}
+                    useWindow={false}>
+                        {items}
+                </InfiniteScroll>
+            </List>
+        </Container>
     )
 }

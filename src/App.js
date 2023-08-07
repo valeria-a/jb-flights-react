@@ -5,6 +5,7 @@ import { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { ME_URL } from './infra/urls';
 import { SetUserContext } from './context/userContext';
+import { Box, Container } from '@mui/material';
 
 function App() {
 
@@ -28,11 +29,12 @@ function App() {
   )
 
   return (
-    <>
-      <Header />
-      <Outlet />
-    </>
-
+      <>
+        <Header />
+        <Container paddingX={'24px'} sx={{maxWidth: 'sm'}}>
+          <Outlet />
+        </Container>
+      </>
   )
 }
 

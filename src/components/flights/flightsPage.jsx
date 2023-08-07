@@ -1,8 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import * as urls from "../../infra/urls";
-import { Button, Stack } from "@mui/material";
+import { Box, Button, Fab, Stack } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
 
 import FlightsSearch from "./flightSearch";
 import FlightsLits from "./flightsList";
@@ -41,11 +42,12 @@ export default function FlightsPage() {
     )
 
     return(
-        <>
-        <h2>Flights page</h2>
-        <FlightsSearch />
+        <Box sx={{overflow: 'hidden'}}>
+        {/* <h2>Flights page</h2> */}
+        <FlightsSearch setFlights={setFlights} />
 
-        <Stack direction={'row'}>
+        {/* <Stack direction={'row'} sx={{width: {md: '100%', lg: '80%'}}}> */}
+        <Stack direction={'row'} sx={{width: '100%'}}>
             <FlightsLits flights={flights} loadMore={fetchData} />
     
             <Outlet />
@@ -53,7 +55,12 @@ export default function FlightsPage() {
 
 
         <Button onClick={() => {navigate('/orders')}}>Go to orders</Button>
-        </>
+
+        <Fab color="primary" aria-label="add" 
+        sx={{position: 'absolute',bottom: 16, right: 16,}}>
+            <AddIcon />
+        </Fab>
+        </Box>
 
     )
 }
