@@ -12,6 +12,7 @@ const FlightDetails = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get(`${FLIGHT_DETAILS_URL}/${flightId}`)
+            console.log('Floght details:', response)
             setFlight(response.data)
         }
         fetchData()

@@ -64,11 +64,11 @@ export default function FlightsPage() {
 
 
         {/* <Button onClick={() => {navigate('/orders')}}>Go to orders</Button> */}
-        <Button onClick={() => setNotification({open: true, msg: 'going to orders'}) }>Go to orders</Button>
+        <Button color='secondary' onClick={() => setNotification({open: true, msg: 'going to orders'}) }>Go to orders</Button>
 
         {user.user?.is_staff &&
             <>
-            <Fab color="primary" aria-label="add" 
+            <Fab color="secondary" aria-label="add" 
                 sx={{position: 'absolute',bottom: 16, right: 16,}}
                 onClick={() => setOpenAddFlightModal(true)}>
                 <AddIcon />

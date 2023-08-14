@@ -13,6 +13,9 @@ import { LOGIN_URL, ME_URL } from "../../infra/urls";
 import { SetUserContext, UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import { SetNotificationContext } from "../../context/notificationContext";
+import MyBox from "../common/myBox";
+import { ERROR } from "../../localize/texts_en";
+
 
 export default function LoginPage() {
 
@@ -46,7 +49,7 @@ export default function LoginPage() {
           severity: 'success'})
     } catch (e) {
       console.log(e)
-      setNotification({open: true, msg: e.response.data.detail, severity: 'error'})
+      setNotification({open: true, msg: `${ERROR}: ${e.response.data.detail}`, severity: 'error'})
     }
     
 
@@ -54,14 +57,7 @@ export default function LoginPage() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Box
-        sx={{  
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+      <MyBox>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -115,7 +111,7 @@ export default function LoginPage() {
             </Grid>
           </Grid>
         </Box>
-      </Box>
+      </MyBox>
     </Container>
   );
 }

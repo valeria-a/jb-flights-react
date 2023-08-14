@@ -24,7 +24,11 @@ export default function FligthItem({flight}) {
                     paddingX: '2em'}}>
                 <Typography>{`${flight.origin_city} => ${flight.dest_city}`}</Typography>
                 <IconButton>
-                    <ArrowCircleRightIcon onClick={handleClick} color="primary"/>
+                    <ArrowCircleRightIcon onClick={handleClick} color="primary"
+                        // sx={{
+                        //     color: 'green'
+                        // }}
+                        />
                 </IconButton>
             </Paper>
             {/* </Box> */}
