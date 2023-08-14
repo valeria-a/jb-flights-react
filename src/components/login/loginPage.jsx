@@ -12,11 +12,13 @@ import axios from "axios";
 import { LOGIN_URL, ME_URL } from "../../infra/urls";
 import { SetUserContext, UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
+import { SetNotificationContext } from "../../context/notificationContext";
 
 export default function LoginPage() {
 
     const navigate = useNavigate()
     const setUser = useContext(SetUserContext)
+    const setNotification = useContext(SetNotificationContext)
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
@@ -25,19 +27,29 @@ export default function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
     const response = 
         await axios.post(LOGIN_URL, {username: email, password: password})
-    console.log(response)
-    localStorage.setItem('token', response.data.access)
+      console.log(response)
+      localStorage.setItem('token', response.data.access)
+
+      const token = localStorage.getItem('token')
+      const meResponse = await axios.get(ME_URL,
+          {headers: {Authorization: `Bearer ${token}`}})
+      console.log(meResponse)
+      setUser({
+          user: {...meResponse.data}
+      })
+      navigate('/')
+      setNotification({open: true, 
+          msg: "You have successfully logged in", 
+          severity: 'success'})
+    } catch (e) {
+      console.log(e)
+      setNotification({open: true, msg: e.response.data.detail, severity: 'error'})
+    }
     
-    const token = localStorage.getItem('token')
-    const meResponse = await axios.get(ME_URL,
-        {headers: {Authorization: `Bearer ${token}`}})
-    console.log(meResponse)
-    setUser({
-        user: {...meResponse.data}
-    })
-    navigate('/')
+
   };
 
   return (
