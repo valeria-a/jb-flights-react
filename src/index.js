@@ -14,6 +14,7 @@ import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { red } from '@mui/material/colors';
 import axios from 'axios';
 import { serverErrors } from './localize/errors_he';
+import ProfilePage from './components/profile/ProfilePage';
 
 axios.interceptors.request.use(
   (config) => {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: '/orders',
         element: <OrdersPage />
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />
       }
     ]
   },

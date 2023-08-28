@@ -59,8 +59,8 @@ function App() {
   return (
       <>
         <Header />
-        <Box paddingX={'24px'} sx={{maxWidth: 'sm'}}>
-        <Outlet />
+        <Box paddingX={'24px'}>
+          <Outlet />
         </Box>
         <Notification />
         </>
