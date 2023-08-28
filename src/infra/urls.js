@@ -10,3 +10,6 @@ export const ME_URL = `${BASE_URL}/api/users/me`
 export const UPLOAD_PROFILE_IMG_URL = `${BASE_URL}/api/users/profile/img`
 
 export const FILE_DOWNLOAD_URL = `${BASE_URL}/api/users/download`
+
+export const BOARDING_PASSES_URL = `${BASE_URL}/api/boarding_passes`
+export const DOWNLOAD_BOARDING_PASS_URL = `${BASE_URL}/api/boarding_passes/download`
