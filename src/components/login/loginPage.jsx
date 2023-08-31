@@ -9,12 +9,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useContext, useState } from "react";
 import axios from "axios";
-import { LOGIN_URL, ME_URL } from "../../infra/urls";
+import { GOOGLE_AUTH_URL, LOGIN_URL, ME_URL } from "../../infra/urls";
 import { SetUserContext, UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import { SetNotificationContext } from "../../context/notificationContext";
 import MyBox from "../common/myBox";
 import { ERROR } from "../../localize/texts_en";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
 
 export default function LoginPage() {
@@ -56,6 +57,7 @@ export default function LoginPage() {
   };
 
   return (
+    <GoogleOAuthProvider clientId="872794659630-ehu55i6a7fbglef45mjno5pgjv7qeab9.apps.googleusercontent.com">
     <Container component="main" maxWidth="xs">
       <MyBox>
         <Typography component="h1" variant="h5">
@@ -110,8 +112,34 @@ export default function LoginPage() {
               </Link>
             </Grid>
           </Grid>
+
+        <GoogleLogin onSuccess={async (credentialResponse) => {
+              console.log(credentialResponse);
+              const response = await axios.post(
+                GOOGLE_AUTH_URL, 
+                {google_jwt: credentialResponse.credential})
+
+                localStorage.setItem('token', response.data.access)
+
+                const token = localStorage.getItem('token')
+                const meResponse = await axios.get(ME_URL,
+                    {headers: {Authorization: `Bearer ${token}`}})
+                console.log(meResponse)
+                setUser({
+                    user: {...meResponse.data}
+                })
+                navigate('/')
+                setNotification({open: true, 
+                    msg: "You have successfully logged in", 
+                    severity: 'success'})
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}/>
+
         </Box>
       </MyBox>
     </Container>
+    </GoogleOAuthProvider>
   );
 }

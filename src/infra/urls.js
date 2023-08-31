@@ -13,3 +13,4 @@ export const FILE_DOWNLOAD_URL = `${BASE_URL}/api/users/download`
 
 export const BOARDING_PASSES_URL = `${BASE_URL}/api/boarding_passes`
 export const DOWNLOAD_BOARDING_PASS_URL = `${BASE_URL}/api/boarding_passes/download`
+export const GOOGLE_AUTH_URL = `${BASE_URL}/api/users/google-auth`
